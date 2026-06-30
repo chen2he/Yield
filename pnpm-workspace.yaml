@@ -1,11 +1,15 @@
-# Pre-approve build scripts for the packages C3 itself installs that need
-# them: `workerd` downloads the platform binary, `esbuild` and `sharp`
-# (via miniflare) download/build native bindings. Without these, pnpm 11+
-# aborts the install with ERR_PNPM_IGNORED_BUILDS.
-allowBuilds:
-  esbuild: true
-  workerd: true
-  sharp: true
-  unrs-resolver: true
-  '@parcel/watcher': true
-  '@swc/core': true
+# Single-package repo. `packages: [.]` is required so pnpm 10.x (the Cloudflare
+# builder) doesn't abort with "packages field missing or empty" when it sees this file.
+packages:
+  - .
+
+# Pre-approve native build scripts (pnpm 10+ blocks dependency build scripts by
+# default): `workerd` downloads its platform binary; `esbuild` / `sharp` / etc.
+# build native bindings. Without this they're skipped (ERR_PNPM_IGNORED_BUILDS).
+onlyBuiltDependencies:
+  - esbuild
+  - workerd
+  - sharp
+  - unrs-resolver
+  - "@parcel/watcher"
+  - "@swc/core"
