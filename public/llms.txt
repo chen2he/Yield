@@ -1,0 +1,25 @@
+# Yield
+
+> Yield is a self-hosted, open-source App Store Connect order-management console. It is driven entirely by Apple's App Store Server Notifications V2 (webhooks) — no API polling and no API keys. Every notification is verified against Apple's certificate chain, then stored, visualized, and pushed to your phone and browser in real time. It runs on Cloudflare Workers, D1, and the edge.
+
+## What it does
+
+- Real-time order, transaction, and subscription tracking sourced exclusively from App Store Server Notifications V2
+- Signature verification (JWS / x5c chain) against Apple's Root CA G3 — no shared secrets
+- Overview dashboard with revenue and subscription charts plus multi-currency FX conversion
+- Order ↔ notification drill-down, with filtering, sorting, and pagination
+- Push delivery to phone (Bark) and browser (Web Push, RFC 8291 + VAPID)
+- Fully self-hosted on your own Cloudflare account; your data never leaves it
+- Bilingual UI (English, 简体中文), light/dark themes, installable PWA
+
+## Tech
+
+- Next.js 16 (App Router, React Server Components) on Cloudflare Workers via OpenNext
+- Cloudflare D1 (SQLite) for storage, Tailwind v4 and shadcn/ui for the interface
+- WebCrypto for HMAC sessions, JWS verification, and Web Push (no Node crypto dependency)
+
+## Links
+
+- Source code (MIT): https://github.com/chen2he/Yield
+- Author: https://github.com/chen2he
+- Related project — Orange Cloud, the native app for managing Cloudflare on Apple devices: https://o-c.do

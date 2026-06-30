@@ -1,7 +1,8 @@
 {
 	"app": {
 		"name": "Yield",
-		"description": "App Store Connect order management"
+		"tagline": "Self-hosted App Store Connect order management",
+		"description": "Self-hosted, open-source App Store Connect order management. Driven entirely by Apple's App Store Server Notifications V2 — real-time, signature-verified orders and push alerts, all on the Cloudflare edge."
 	},
 	"landing": {
 		"nav": { "features": "Features", "how": "How it works", "stack": "Stack", "cta": "Dashboard" },

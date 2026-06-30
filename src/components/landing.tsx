@@ -1,16 +1,15 @@
 import { IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
 import Image from "next/image";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Fragment } from "react";
 import { LandingControls } from "@/components/landing-controls";
 import { Link } from "@/i18n/navigation";
+import { routing } from "@/i18n/routing";
+import { AUTHOR, AUTHOR_URL, GITHUB_URL, LICENSE_URL, OC_URL, ogImagePath, SITE_NAME, SITE_URL } from "@/lib/site";
 import { HeroFrameCaption } from "./hero-frame-caption";
 
 const plexSans = IBM_Plex_Sans({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-plex-sans" });
 const plexMono = IBM_Plex_Mono({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--font-plex-mono" });
-
-const GITHUB_URL = "https://github.com/chen2he/Yield";
-const OC_URL = "https://o-c.do";
 
 // 与语言无关的内容：技术名、序号、列表 id（文案在 messages 的 landing 命名空间）。
 const STACK = ["Next.js 16", "React 19", "Cloudflare Workers (OpenNext)", "Cloudflare D1", "Tailwind v4", "shadcn/ui", "WebCrypto", "Edge-native"];
@@ -28,6 +27,51 @@ const h2 = "mt-3.5 text-[28px] font-semibold tracking-[-1px] sm:text-4xl";
 
 export async function Landing() {
 	const t = await getTranslations("landing");
+	const tApp = await getTranslations("app");
+	const locale = await getLocale();
+
+	// GEO：schema.org 结构化数据，直出在 SSR HTML 中，便于搜索引擎与 LLM 解析产品事实。
+	const jsonLd = {
+		"@context": "https://schema.org",
+		"@graph": [
+			{
+				"@type": "WebSite",
+				"@id": `${SITE_URL}/#website`,
+				url: `${SITE_URL}/`,
+				name: SITE_NAME,
+				description: tApp("description"),
+				inLanguage: [...routing.locales],
+				publisher: { "@id": `${SITE_URL}/#author` },
+			},
+			{
+				"@type": "Person",
+				"@id": `${SITE_URL}/#author`,
+				name: AUTHOR,
+				url: AUTHOR_URL,
+			},
+			{
+				"@type": "SoftwareApplication",
+				"@id": `${SITE_URL}/#app`,
+				name: SITE_NAME,
+				url: `${SITE_URL}/`,
+				description: tApp("description"),
+				applicationCategory: "BusinessApplication",
+				applicationSubCategory: "DeveloperApplication",
+				operatingSystem: "Cloudflare Workers, Web",
+				offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+				isAccessibleForFree: true,
+				license: LICENSE_URL,
+				softwareRequirements: "Cloudflare account (Workers + D1)",
+				featureList: FEATURES.map((f) => t(`features.items.${f.id}.title`)),
+				inLanguage: [...routing.locales],
+				image: `${SITE_URL}${ogImagePath(locale)}`,
+				screenshot: `${SITE_URL}${ogImagePath(locale)}`,
+				author: { "@id": `${SITE_URL}/#author` },
+				sameAs: [GITHUB_URL, OC_URL],
+			},
+		],
+	};
+
 	const navItems = (
 		<>
 			<a href="#features" className={navLink}>{t("nav.features")}</a>
@@ -39,6 +83,8 @@ export async function Landing() {
 
 	return (
 		<div className={`yield-landing ${plexSans.variable} ${plexMono.variable} min-h-dvh w-full bg-[var(--bg)] text-[var(--text)] antialiased`}>
+			{/* biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD 结构化数据，值全来自受控常量/文案 */}
+			<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 			{/* NAV */}
 			<header className="border-b border-[var(--border2)]">
 				<div className="mx-auto flex max-w-[1120px] items-center justify-between gap-4 px-5 py-4 sm:px-8">

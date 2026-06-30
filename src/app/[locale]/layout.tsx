@@ -7,6 +7,7 @@ import { PwaRegister } from "@/components/pwa-register";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { routing } from "@/i18n/routing";
+import { AUTHOR, AUTHOR_URL, OG_IMAGE, OG_LOCALE, ogImagePath, SEO_KEYWORDS, SITE_NAME, SITE_URL } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import "../globals.css";
 
@@ -25,10 +26,48 @@ export async function generateMetadata({
 }): Promise<Metadata> {
 	const { locale } = await params;
 	const t = await getTranslations({ locale, namespace: "app" });
+	const title = `${t("name")} — ${t("tagline")}`;
+	const description = t("description");
+
+	// localePrefix: "as-needed" → 默认语言在根路径，其余带语言前缀。
+	// canonical / hreflang / og:url 都据此构造（相对路径会用 metadataBase 解析为绝对地址）。
+	const pathFor = (l: string) => (l === routing.defaultLocale ? "/" : `/${l}`);
+	const languages: Record<string, string> = { "x-default": pathFor(routing.defaultLocale) };
+	for (const l of routing.locales) languages[l] = pathFor(l);
+	const ogImage = { url: ogImagePath(locale), width: OG_IMAGE.width, height: OG_IMAGE.height, alt: `${SITE_NAME} dashboard` };
+
 	return {
-		title: t("name"),
-		description: t("description"),
-		applicationName: "Yield",
+		metadataBase: new URL(SITE_URL),
+		title: { default: title, template: `%s · ${SITE_NAME}` },
+		description,
+		applicationName: SITE_NAME,
+		keywords: SEO_KEYWORDS,
+		authors: [{ name: AUTHOR, url: AUTHOR_URL }],
+		creator: AUTHOR,
+		publisher: AUTHOR,
+		category: "technology",
+		alternates: { canonical: pathFor(locale), languages },
+		openGraph: {
+			type: "website",
+			siteName: SITE_NAME,
+			title,
+			description,
+			url: pathFor(locale),
+			locale: OG_LOCALE[locale] ?? locale,
+			alternateLocale: routing.locales.filter((l) => l !== locale).map((l) => OG_LOCALE[l] ?? l),
+			images: [ogImage],
+		},
+		twitter: {
+			card: "summary_large_image",
+			title,
+			description,
+			images: [ogImage],
+		},
+		robots: {
+			index: true,
+			follow: true,
+			googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 },
+		},
 		manifest: "/manifest.webmanifest",
 		icons: {
 			icon: [
@@ -38,7 +77,7 @@ export async function generateMetadata({
 			],
 			apple: [{ url: "/icons/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
 		},
-		appleWebApp: { capable: true, title: "Yield", statusBarStyle: "default" },
+		appleWebApp: { capable: true, title: SITE_NAME, statusBarStyle: "default" },
 	};
 }
 

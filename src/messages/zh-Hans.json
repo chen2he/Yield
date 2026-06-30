@@ -1,7 +1,8 @@
 {
 	"app": {
 		"name": "Yield",
-		"description": "App Store Connect 订单管理系统"
+		"tagline": "自托管的 App Store Connect 订单管理系统",
+		"description": "自托管、开源的 App Store Connect 订单管理系统。数据完全来自 Apple 的服务器通知（App Store Server Notifications V2）—— 每笔订单经签名校验后实时入库、可视化，并推送到手机与浏览器，全部跑在 Cloudflare 边缘上。"
 	},
 	"landing": {
 		"nav": { "features": "功能", "how": "工作原理", "stack": "技术栈", "cta": "进入后台" },

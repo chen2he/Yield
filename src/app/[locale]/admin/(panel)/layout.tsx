@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { getCloudflareContext } from "@opennextjs/cloudflare";
@@ -10,6 +11,9 @@ import { SESSION_COOKIE, verifySessionToken } from "@/lib/admin/auth";
 
 // 读取会话 cookie 即令本子树动态渲染；未登录 -> /admin/login（locale 感知）。
 export const dynamic = "force-dynamic";
+
+// 鉴权后台不应被收录（robots.txt 已屏蔽，这里再加一道 meta 兜底）。
+export const metadata: Metadata = { robots: { index: false, follow: false } };
 
 export default async function PanelLayout({
 	children,
