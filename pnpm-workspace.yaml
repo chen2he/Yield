@@ -7,3 +7,5 @@ allowBuilds:
   workerd: true
   sharp: true
   unrs-resolver: true
+  '@parcel/watcher': true
+  '@swc/core': true

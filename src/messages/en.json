@@ -1,0 +1,300 @@
+{
+	"app": {
+		"name": "Yield",
+		"description": "App Store Connect order management"
+	},
+	"landing": {
+		"nav": { "features": "Features", "how": "How it works", "stack": "Stack", "cta": "Dashboard" },
+		"hero": {
+			"badge": "100% webhook-driven · self-hosted · open source",
+			"title": "Your App Store revenue, the moment it happens.",
+			"subtitle": "A self-hosted App Store Connect console driven entirely by Apple's Server Notifications V2 — no polling, no API keys. Every event is signature-verified, stored, visualized, and pushed to your phone and browser in real time. Runs on the Cloudflare edge.",
+			"ctaPrimary": "Enter dashboard",
+			"ctaSecondary": "View on GitHub",
+			"frameCaption": "Yield dashboard"
+		},
+		"points": {
+			"label": "Why Yield",
+			"items": {
+				"webhook": { "title": "100% webhook-driven", "desc": "Real-time the instant Apple fires. No polling, no API keys to rotate." },
+				"selfHosted": { "title": "Self-hosted · your data", "desc": "Runs on your own Cloudflare Workers + D1. Nothing leaves your account." },
+				"verified": { "title": "Signature-verified", "desc": "Every event validated against Apple's certificate chain. No shared secrets." },
+				"edge": { "title": "Edge-native", "desc": "Global low latency and low cost, served from the Cloudflare edge." }
+			}
+		},
+		"features": {
+			"label": "Features",
+			"title": "Everything from one webhook.",
+			"items": {
+				"overview": { "title": "Overview dashboard", "desc": "KPI cards — orders, FX-converted revenue, active subscriptions, refund rate — plus trend, by-product, subscription-status and by-currency charts. Switch environment and 7/30-day range." },
+				"orders": { "title": "Order management", "desc": "Filter by type, region, status, subscription state and environment. Sort by amount and time, paginate, and open a detail drawer." },
+				"feed": { "title": "Notification feed", "desc": "Every webhook event, filtered by type, subtype and environment, sortable, with a detail drawer." },
+				"linking": { "title": "Order ↔ notification linking", "desc": "Jump from an order to its related notifications and from a notification back to its order. Two-way navigation." },
+				"push": { "title": "Multi-channel push", "desc": "Bark + Orange Cloud + Web Push. Localized, emoji-tagged, high-priority ring for revenue events, silent in sandbox, grouped by app." },
+				"intake": { "title": "Secure webhook intake", "desc": "Full ASSN V2 JWS verification, pinned to Apple Root CA G3, with idempotent writes." },
+				"settings": { "title": "Settings & customization", "desc": "Display currency, product-ID → name mapping, push device IDs, push language, browser-notification toggle." },
+				"pwa": { "title": "Installable PWA", "desc": "Add to home screen, standalone window, with an app icon and service worker." },
+				"themes": { "title": "Bilingual + themes", "desc": "English / Simplified Chinese, light / dark / follow system." }
+			}
+		},
+		"how": {
+			"label": "How it works",
+			"title": "From Apple to your pocket in one hop.",
+			"steps": {
+				"appstore": { "label": "App Store", "sub": "Server Notifications V2" },
+				"verify": { "label": "Verify", "sub": "JWS · cert chain" },
+				"store": { "label": "Store", "sub": "Cloudflare D1" },
+				"notify": { "label": "Notify", "sub": "Bark · Web Push" }
+			}
+		},
+		"stack": { "label": "Built on", "title": "A modern edge stack." },
+		"oc": {
+			"label": "Also from us",
+			"title": "Cloudflare, managed natively — Orange Cloud",
+			"desc": "Yield comes from the team behind Orange Cloud, the native app for managing your Cloudflare account across Apple devices.",
+			"cta": "Visit Orange Cloud"
+		},
+		"footer": {
+			"blurb": "Self-hosted, real-time App Store order management on the edge.",
+			"copyright": "© 2026 Yield",
+			"license": "Open source · MIT",
+			"oc": "Part of Orange Cloud"
+		}
+	},
+	"nav": {
+		"overview": "Overview",
+		"notifications": "Notifications",
+		"orders": "Orders",
+		"settings": "Settings",
+		"logout": "Sign out"
+	},
+	"login": {
+		"title": "Sign in",
+		"subtitle": "Yield",
+		"passwordLabel": "Admin secret",
+		"submit": "Sign in",
+		"error": "Incorrect secret, please try again.",
+		"hint": "Data source: App Store Connect Webhook"
+	},
+	"overview": {
+		"title": "Overview",
+		"description": "A high-level view of orders and notifications.",
+		"kpi": {
+			"orders": "Orders",
+			"ordersHint": "{paid, number} paid · {refunded, number} refunded",
+			"amount": "Order amount",
+			"amountHint": "≈ {base} via FX",
+			"activeSubs": "Active subscriptions",
+			"activeSubsHint": "{lifetime, number} lifetime · {recurring, number} recurring",
+			"refunds": "Refunds",
+			"refundsHint": "{rate} refund rate"
+		},
+		"env": {
+			"all": "All",
+			"production": "Production",
+			"sandbox": "Sandbox"
+		},
+		"range7": "7d",
+		"range30": "30d",
+		"amountSeries": "Amount ({base})",
+		"fxUnavailable": "FX unavailable",
+		"trendTitle": "Orders over time",
+		"productTitle": "Orders by product",
+		"subStatusTitle": "Subscription status",
+		"currencyTitle": "Orders by currency"
+	},
+	"orders": {
+		"title": "Orders",
+		"description": "Order records from App Store Connect.",
+		"empty": "No orders match these filters.",
+		"count": "{count, number} total",
+		"columns": {
+			"product": "Product",
+			"type": "Type",
+			"amount": "Amount",
+			"offer": "Offer",
+			"region": "Region",
+			"environment": "Env",
+			"date": "Purchased",
+			"status": "Status"
+		},
+		"filters": {
+			"type": "Type",
+			"region": "Region",
+			"status": "Status",
+			"subStatus": "Subscription",
+			"environment": "Environment",
+			"allTypes": "All types",
+			"allRegions": "All regions",
+			"allStatuses": "All statuses",
+			"allSubStatuses": "All subscription states",
+			"allEnvironments": "All environments"
+		}
+	},
+	"notifications": {
+		"title": "Notifications",
+		"description": "Webhook notifications from App Store Connect.",
+		"empty": "No notifications match these filters.",
+		"count": "{count, number} total",
+		"columns": {
+			"type": "Event",
+			"related": "Related order",
+			"environment": "Env",
+			"received": "Received"
+		},
+		"filters": {
+			"eventType": "Event",
+			"subtype": "Subtype",
+			"environment": "Environment",
+			"allEventTypes": "All events",
+			"allSubtypes": "All subtypes",
+			"allEnvironments": "All environments"
+		}
+	},
+	"settings": {
+		"title": "Settings",
+		"description": "Console preferences and integrations.",
+		"prefsTitle": "Preferences",
+		"prefsDescription": "Display currency and push device IDs.",
+		"currencyLabel": "Display currency",
+		"barkLabel": "Bark device ID",
+		"barkHint": "for push notifications",
+		"ocLabel": "Orange Cloud device ID",
+		"ocHint": "for push notifications",
+		"pushLocaleLabel": "Push language",
+		"save": "Save",
+		"productsTitle": "Products",
+		"productsDescription": "Map full product IDs to readable labels for display.",
+		"productIdLabel": "Product ID",
+		"labelLabel": "Label",
+		"labelPlaceholder": "e.g. Pro (Lifetime)",
+		"add": "Add",
+		"delete": "Delete",
+		"noProducts": "No custom products yet.",
+		"toastSaved": "Settings saved",
+		"toastProductAdded": "Product added",
+		"toastProductDeleted": "Product deleted",
+		"pushSectionTitle": "Browser notifications",
+		"pushSectionDescription": "Receive push notifications in this browser or installed app.",
+		"pushEnable": "Enable",
+		"pushDisable": "Disable",
+		"pushOn": "Enabled",
+		"pushUnsupported": "This browser doesn't support push notifications.",
+		"pushBlocked": "Notifications are blocked. Allow them in your browser settings.",
+		"pushNoKey": "Push isn't configured on the server (missing VAPID key).",
+		"pushError": "Couldn't update notification settings.",
+		"toastPushEnabled": "Browser notifications enabled",
+		"toastPushDisabled": "Browser notifications disabled",
+		"webhookTitle": "Webhook integration",
+		"webhookDescription": "Set this as your App Store Server Notifications V2 URL in App Store Connect. Incoming events are verified, stored, and pushed to Bark / Orange Cloud."
+	},
+	"language": {
+		"label": "Language"
+	},
+	"theme": {
+		"appearance": "Appearance",
+		"light": "Light",
+		"dark": "Dark",
+		"system": "System"
+	},
+	"common": {
+		"pageInfo": "Page {page} / {total}",
+		"perPage": "Per page"
+	},
+	"orderStatus": {
+		"paid": "Paid",
+		"refunded": "Refunded",
+		"revoked": "Revoked"
+	},
+	"subStatus": {
+		"active": "Active",
+		"expired": "Expired",
+		"billing_retry": "In billing retry",
+		"grace": "In grace period",
+		"refunded": "Refunded",
+		"revoked": "Revoked"
+	},
+	"revReason": {
+		"0": "Other reason",
+		"1": "App issue"
+	},
+	"detail": {
+		"orderTitle": "Order detail",
+		"notificationTitle": "Notification detail",
+		"product": "Product",
+		"type": "Type",
+		"amount": "Amount",
+		"region": "Region",
+		"environment": "Environment",
+		"purchased": "Purchased",
+		"status": "Status",
+		"offer": "Offer",
+		"event": "Event",
+		"received": "Received",
+		"transactionId": "Transaction ID",
+		"originalTransactionId": "Original transaction ID",
+		"notificationId": "Notification ID",
+		"relatedNotifications": "Related notifications",
+		"relatedOrder": "Related order",
+		"noRelatedNotifications": "No related notifications.",
+		"noRelatedOrder": "No related order."
+	},
+	"offerType": {
+		"1": "Introductory",
+		"2": "Promotional",
+		"3": "Offer code",
+		"4": "Win-back"
+	},
+	"txType": {
+		"nonConsumable": "Non-consumable",
+		"consumable": "Consumable",
+		"autoRenewable": "Auto-renewable",
+		"nonRenewing": "Non-renewing"
+	},
+	"notifType": {
+		"SUBSCRIBED": "Subscribed",
+		"DID_RENEW": "Renewed",
+		"DID_CHANGE_RENEWAL_STATUS": "Renewal status changed",
+		"DID_CHANGE_RENEWAL_PREF": "Renewal plan changed",
+		"DID_FAIL_TO_RENEW": "Renewal failed",
+		"EXPIRED": "Expired",
+		"GRACE_PERIOD_EXPIRED": "Grace period ended",
+		"OFFER_REDEEMED": "Offer redeemed",
+		"PRICE_INCREASE": "Price increase",
+		"PRICE_CHANGE": "Price change",
+		"REFUND": "Refund",
+		"REFUND_DECLINED": "Refund declined",
+		"REFUND_REVERSED": "Refund reversed",
+		"CONSUMPTION_REQUEST": "Consumption request",
+		"RENEWAL_EXTENDED": "Renewal extended",
+		"RENEWAL_EXTENSION": "Renewal extension",
+		"REVOKE": "Revoked",
+		"ONE_TIME_CHARGE": "One-time purchase",
+		"EXTERNAL_PURCHASE_TOKEN": "External purchase token",
+		"RESCIND_CONSENT": "Consent rescinded",
+		"METADATA_UPDATE": "Metadata update",
+		"MIGRATION": "Migration",
+		"TEST": "Test"
+	},
+	"subtype": {
+		"INITIAL_BUY": "Initial buy",
+		"RESUBSCRIBE": "Resubscribe",
+		"UPGRADE": "Upgrade",
+		"DOWNGRADE": "Downgrade",
+		"AUTO_RENEW_ENABLED": "Auto-renew on",
+		"AUTO_RENEW_DISABLED": "Auto-renew off",
+		"VOLUNTARY": "Voluntary",
+		"BILLING_RETRY": "Billing retry",
+		"BILLING_RECOVERY": "Billing recovery",
+		"GRACE_PERIOD": "Grace period",
+		"PRICE_INCREASE": "Price increase",
+		"PENDING": "Pending",
+		"ACCEPTED": "Accepted",
+		"PRODUCT_NOT_FOR_SALE": "Not for sale",
+		"SUMMARY": "Summary",
+		"FAILURE": "Failure",
+		"UNREPORTED": "Unreported",
+		"ACTIVE_TOKEN_REMINDER": "Token reminder",
+		"CREATED": "Created"
+	}
+}

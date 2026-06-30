@@ -1,0 +1,11 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="leaf" x1="0" y1="2" x2="0" y2="120" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e6c886"/>
+      <stop offset="1" stop-color="#c89f4c"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(51,60) scale(7.2)">
+    <path d="M66.78,45.4c0,0,4.28-13.43,14.12-23.62c9.43-9.76,19.06-12.96,26.78-13.92c8.51-1.06,11.98-0.95,13.44,0.1s0.94,2.7,0.97,4.16c0.19,10.44,0.58,23.97-11.7,36.35C97.28,61.67,87.94,64.04,77.71,65.09c-10.22,1.04-9.06-3.62-9.06-3.62L66.78,45.4z" fill="url(#leaf)"/>
+  </g>
+</svg>

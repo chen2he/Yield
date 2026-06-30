@@ -1,0 +1,9 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <g transform="translate(51,60) scale(7.2)">
+    <g transform="translate(128,0) scale(-1,1)">
+      <g transform="translate(68,63) scale(0.9) translate(-68,-63)">
+        <path d="M86.68,30.68c-9.3,11.02-13.99,22.13-14.48,25.03s1.12,2.78,2.03,1.55c1.64-2.22,7.35-12.37,15.85-22.04c7.36-8.36,18.56-17.4,20.2-19.33c1.02-1.2-0.1-2.71-1.64-2.03C107.1,14.53,96.19,19.41,86.68,30.68z" fill="#f6ecd2" opacity="0.85"/>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,90 @@
+{
+  "fill" : "automatic",
+  "groups" : [
+    {
+      "layers" : [
+        {
+          "fill" : "none",
+          "hidden" : false,
+          "image-name" : "VeinRight.svg",
+          "name" : "Vein Right",
+          "position" : {
+            "scale" : 0.8,
+            "translation-in-points" : [
+              -15.436963555120883,
+              2.7036329657095166
+            ]
+          }
+        },
+        {
+          "fill" : "none",
+          "hidden" : false,
+          "image-name" : "LeafRight.svg",
+          "name" : "Leaf Right",
+          "position" : {
+            "scale" : 0.8,
+            "translation-in-points" : [
+              -15.436963555120883,
+              2.7036329657095166
+            ]
+          }
+        },
+        {
+          "fill" : "none",
+          "hidden" : false,
+          "image-name" : "VeinLeft.svg",
+          "name" : "Vein Left",
+          "position" : {
+            "scale" : 0.8,
+            "translation-in-points" : [
+              -15.436963555120883,
+              2.7036329657095166
+            ]
+          }
+        },
+        {
+          "fill" : "none",
+          "hidden" : false,
+          "image-name" : "LeafLeft.svg",
+          "name" : "Leaf Left",
+          "position" : {
+            "scale" : 0.8,
+            "translation-in-points" : [
+              -15.436963555120883,
+              2.7036329657095166
+            ]
+          }
+        },
+        {
+          "blend-mode" : "normal",
+          "fill" : "automatic",
+          "glass" : true,
+          "hidden" : false,
+          "image-name" : "Stem.svg",
+          "name" : "Stem",
+          "position" : {
+            "scale" : 0.8,
+            "translation-in-points" : [
+              -15.436963555120883,
+              2.7036329657095166
+            ]
+          }
+        }
+      ],
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
+      },
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.2
+      }
+    }
+  ],
+  "supported-platforms" : {
+    "circles" : [
+      "watchOS"
+    ],
+    "squares" : "shared"
+  }
+}

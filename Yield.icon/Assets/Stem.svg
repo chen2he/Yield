@@ -1,0 +1,11 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="stem" x1="0" y1="2" x2="0" y2="120" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e6c886"/>
+      <stop offset="1" stop-color="#c89f4c"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(51,60) scale(7.2)">
+    <path d="M64 60 C 65.5 79, 57.5 90, 60 102 C 61.5 111, 63 114.5, 64 117.5" fill="none" stroke="url(#stem)" stroke-width="7.5" stroke-linecap="round"/>
+  </g>
+</svg>

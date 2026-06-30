@@ -2,3 +2,9 @@
 # https://opennext.js.org/cloudflare/caching#static-assets-caching
 /_next/static/*
   Cache-Control: public,max-age=31536000,immutable
+
+# PWA：manifest 用正确 MIME；service worker 不缓存以便更新及时生效。
+/manifest.webmanifest
+  Content-Type: application/manifest+json
+/sw.js
+  Cache-Control: no-cache

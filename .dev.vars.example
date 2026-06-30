@@ -1,0 +1,16 @@
+# Local development variables for `next dev` / `wrangler dev`
+# (loaded by @opennextjs/cloudflare). Copy to `.dev.vars` and fill in.
+# NEVER commit real secrets — `.dev.vars` is gitignored.
+
+NEXTJS_ENV=development
+
+# Admin login secret (HMAC session signing key).
+# Production: `wrangler secret put ADMIN_PASSWORD`
+ADMIN_PASSWORD=dev-secret
+
+# Web Push VAPID keys — generate a pair (see README "Web Push").
+# Production: put VAPID_PUBLIC_KEY + VAPID_SUBJECT in wrangler.jsonc `vars`,
+# and the private key via `wrangler secret put VAPID_PRIVATE_KEY`.
+VAPID_PUBLIC_KEY=
+VAPID_PRIVATE_KEY=
+VAPID_SUBJECT=mailto:you@example.com

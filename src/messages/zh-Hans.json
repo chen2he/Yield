@@ -1,0 +1,300 @@
+{
+	"app": {
+		"name": "Yield",
+		"description": "App Store Connect 订单管理系统"
+	},
+	"landing": {
+		"nav": { "features": "功能", "how": "工作原理", "stack": "技术栈", "cta": "进入后台" },
+		"hero": {
+			"badge": "100% Webhook 驱动 · 自托管 · 开源",
+			"title": "App Store 订单与营收，实时尽收眼底。",
+			"subtitle": "一个自托管的 App Store Connect 订单管理控制台，数据完全来自 Apple 的服务器通知（Server Notifications V2）—— 不轮询、不用 API 密钥。每条事件经签名校验后入库、可视化，并即时推送到你的手机与浏览器。跑在 Cloudflare 边缘上。",
+			"ctaPrimary": "进入后台",
+			"ctaSecondary": "在 GitHub 查看",
+			"frameCaption": "Yield 仪表盘"
+		},
+		"points": {
+			"label": "为什么选 Yield",
+			"items": {
+				"webhook": { "title": "100% Webhook 驱动", "desc": "Apple 一触发即到账。无需轮询、无需管理 API 密钥。" },
+				"selfHosted": { "title": "自托管 · 数据归你", "desc": "跑在你自己的 Cloudflare Workers + D1，数据不出你的账户。" },
+				"verified": { "title": "签名验签", "desc": "每条事件用 Apple 证书链验真，无共享密钥。" },
+				"edge": { "title": "边缘原生", "desc": "全球低延迟、低成本，由 Cloudflare 边缘提供。" }
+			}
+		},
+		"features": {
+			"label": "功能",
+			"title": "一个 Webhook，搞定一切。",
+			"items": {
+				"overview": { "title": "总览仪表盘", "desc": "KPI 卡片（订单数、按汇率折算的金额、活跃订阅、退款率），加趋势、按商品、订阅状态与按币种图表。可切环境与 7 / 30 天。" },
+				"orders": { "title": "订单管理", "desc": "按类型、地区、状态、订阅状态与环境多维筛选。金额与时间排序、分页，并打开详情抽屉。" },
+				"feed": { "title": "通知流", "desc": "全部 Webhook 事件，按事件类型、子类型与环境筛选，可排序，带详情抽屉。" },
+				"linking": { "title": "订单 ↔ 通知联动", "desc": "点订单看相关通知，点通知看对应订单，双向跳转。" },
+				"push": { "title": "多渠道推送", "desc": "Bark + Orange Cloud + Web Push。内容本地化、带 emoji，入账事件高优先级响铃，沙盒静默，按 app 分组。" },
+				"intake": { "title": "安全的 Webhook 接入", "desc": "完整 ASSN V2 JWS 验签，证书链固定到 Apple Root CA G3，幂等入库。" },
+				"settings": { "title": "设置与自定义", "desc": "展示币种、商品 ID → 名称映射、推送 device ID、推送语言、浏览器通知开关。" },
+				"pwa": { "title": "PWA 可安装", "desc": "加到主屏，独立窗口，带应用图标与 service worker。" },
+				"themes": { "title": "双语 + 主题", "desc": "英文 / 简体中文，浅色 / 深色 / 跟随系统。" }
+			}
+		},
+		"how": {
+			"label": "工作原理",
+			"title": "从 Apple 到你的口袋，一跳直达。",
+			"steps": {
+				"appstore": { "label": "App Store", "sub": "Server Notifications V2" },
+				"verify": { "label": "验签", "sub": "JWS · 证书链" },
+				"store": { "label": "入库", "sub": "Cloudflare D1" },
+				"notify": { "label": "推送", "sub": "Bark · 浏览器推送" }
+			}
+		},
+		"stack": { "label": "技术栈", "title": "现代边缘技术栈。" },
+		"oc": {
+			"label": "同款出品",
+			"title": "原生管理 Cloudflare —— Orange Cloud",
+			"desc": "Yield 出自 Orange Cloud 团队。Orange Cloud 是在 Apple 设备上原生管理 Cloudflare 账户的 App。",
+			"cta": "访问 Orange Cloud"
+		},
+		"footer": {
+			"blurb": "自托管、实时的 App Store 订单管理，跑在边缘上。",
+			"copyright": "© 2026 Yield",
+			"license": "开源 · MIT",
+			"oc": "Orange Cloud 出品"
+		}
+	},
+	"nav": {
+		"overview": "总览",
+		"notifications": "通知",
+		"orders": "订单",
+		"settings": "设置",
+		"logout": "退出登录"
+	},
+	"login": {
+		"title": "登录",
+		"subtitle": "Yield",
+		"passwordLabel": "管理口令",
+		"submit": "登录",
+		"error": "口令不正确，请重试。",
+		"hint": "数据来源：App Store Connect Webhook"
+	},
+	"overview": {
+		"title": "总览",
+		"description": "订单与通知的整体概况。",
+		"kpi": {
+			"orders": "订单",
+			"ordersHint": "{paid, number} 已支付 · {refunded, number} 已退款",
+			"amount": "订单金额",
+			"amountHint": "≈ {base}（按汇率）",
+			"activeSubs": "活跃订阅",
+			"activeSubsHint": "{lifetime, number} 买断 · {recurring, number} 周期订阅",
+			"refunds": "退款",
+			"refundsHint": "退款率 {rate}"
+		},
+		"env": {
+			"all": "全部",
+			"production": "Production",
+			"sandbox": "Sandbox"
+		},
+		"range7": "7 天",
+		"range30": "30 天",
+		"amountSeries": "金额（{base}）",
+		"fxUnavailable": "汇率不可用",
+		"trendTitle": "订单趋势",
+		"productTitle": "各商品订单",
+		"subStatusTitle": "订阅状态",
+		"currencyTitle": "各币种订单"
+	},
+	"orders": {
+		"title": "订单",
+		"description": "来自 App Store Connect 的订单记录。",
+		"empty": "没有符合筛选条件的订单。",
+		"count": "共 {count, number} 条",
+		"columns": {
+			"product": "商品",
+			"type": "类型",
+			"amount": "金额",
+			"offer": "优惠",
+			"region": "地区",
+			"environment": "环境",
+			"date": "购买时间",
+			"status": "状态"
+		},
+		"filters": {
+			"type": "类型",
+			"region": "地区",
+			"status": "状态",
+			"subStatus": "订阅状态",
+			"environment": "环境",
+			"allTypes": "全部类型",
+			"allRegions": "全部地区",
+			"allStatuses": "全部状态",
+			"allSubStatuses": "全部订阅状态",
+			"allEnvironments": "全部环境"
+		}
+	},
+	"notifications": {
+		"title": "通知",
+		"description": "来自 App Store Connect 的 Webhook 通知。",
+		"empty": "没有符合筛选条件的通知。",
+		"count": "共 {count, number} 条",
+		"columns": {
+			"type": "事件",
+			"related": "关联订单",
+			"environment": "环境",
+			"received": "接收时间"
+		},
+		"filters": {
+			"eventType": "事件",
+			"subtype": "子类型",
+			"environment": "环境",
+			"allEventTypes": "全部事件",
+			"allSubtypes": "全部子类型",
+			"allEnvironments": "全部环境"
+		}
+	},
+	"settings": {
+		"title": "设置",
+		"description": "控制台偏好与集成配置。",
+		"prefsTitle": "偏好设置",
+		"prefsDescription": "展示币种与推送 device ID。",
+		"currencyLabel": "展示币种",
+		"barkLabel": "Bark device ID",
+		"barkHint": "用于推送通知",
+		"ocLabel": "Orange Cloud device ID",
+		"ocHint": "用于推送通知",
+		"pushLocaleLabel": "推送语言",
+		"save": "保存",
+		"productsTitle": "商品管理",
+		"productsDescription": "把完整 product ID 映射为可读名称，便于展示。",
+		"productIdLabel": "商品 ID",
+		"labelLabel": "名称",
+		"labelPlaceholder": "如 专业版（永久）",
+		"add": "添加",
+		"delete": "删除",
+		"noProducts": "暂无自定义商品。",
+		"toastSaved": "设置已保存",
+		"toastProductAdded": "商品已添加",
+		"toastProductDeleted": "商品已删除",
+		"pushSectionTitle": "浏览器通知",
+		"pushSectionDescription": "在此浏览器或已安装的应用中接收推送通知。",
+		"pushEnable": "开启",
+		"pushDisable": "关闭",
+		"pushOn": "已开启",
+		"pushUnsupported": "此浏览器不支持推送通知。",
+		"pushBlocked": "通知已被屏蔽，请在浏览器设置中允许。",
+		"pushNoKey": "服务端未配置推送（缺少 VAPID 公钥）。",
+		"pushError": "更新通知设置失败。",
+		"toastPushEnabled": "浏览器通知已开启",
+		"toastPushDisabled": "浏览器通知已关闭",
+		"webhookTitle": "Webhook 接入",
+		"webhookDescription": "在 App Store Connect 把此地址设为 App Store Server Notifications V2 通知 URL。收到的事件会验签、入库，并推送到 Bark / Orange Cloud。"
+	},
+	"language": {
+		"label": "语言"
+	},
+	"theme": {
+		"appearance": "外观",
+		"light": "浅色",
+		"dark": "深色",
+		"system": "跟随系统"
+	},
+	"common": {
+		"pageInfo": "第 {page} / {total} 页",
+		"perPage": "每页"
+	},
+	"orderStatus": {
+		"paid": "已支付",
+		"refunded": "已退款",
+		"revoked": "已撤销"
+	},
+	"subStatus": {
+		"active": "生效中",
+		"expired": "已过期",
+		"billing_retry": "计费重试",
+		"grace": "宽限期",
+		"refunded": "已退款",
+		"revoked": "已撤销"
+	},
+	"revReason": {
+		"0": "其他原因",
+		"1": "App 问题"
+	},
+	"detail": {
+		"orderTitle": "订单详情",
+		"notificationTitle": "通知详情",
+		"product": "商品",
+		"type": "类型",
+		"amount": "金额",
+		"region": "地区",
+		"environment": "环境",
+		"purchased": "购买时间",
+		"status": "状态",
+		"offer": "优惠",
+		"event": "事件",
+		"received": "接收时间",
+		"transactionId": "交易 ID",
+		"originalTransactionId": "原始交易 ID",
+		"notificationId": "通知 ID",
+		"relatedNotifications": "相关通知",
+		"relatedOrder": "相关订单",
+		"noRelatedNotifications": "暂无相关通知。",
+		"noRelatedOrder": "暂无相关订单。"
+	},
+	"offerType": {
+		"1": "试用优惠",
+		"2": "促销优惠",
+		"3": "兑换码",
+		"4": "赢回优惠"
+	},
+	"txType": {
+		"nonConsumable": "买断",
+		"consumable": "消耗型",
+		"autoRenewable": "自动续订",
+		"nonRenewing": "非续订订阅"
+	},
+	"notifType": {
+		"SUBSCRIBED": "订阅开始",
+		"DID_RENEW": "续订成功",
+		"DID_CHANGE_RENEWAL_STATUS": "续订状态变更",
+		"DID_CHANGE_RENEWAL_PREF": "续订方案变更",
+		"DID_FAIL_TO_RENEW": "续订失败",
+		"EXPIRED": "订阅过期",
+		"GRACE_PERIOD_EXPIRED": "宽限期结束",
+		"OFFER_REDEEMED": "优惠兑换",
+		"PRICE_INCREASE": "涨价通知",
+		"PRICE_CHANGE": "价格变更",
+		"REFUND": "退款",
+		"REFUND_DECLINED": "退款被拒",
+		"REFUND_REVERSED": "退款撤销",
+		"CONSUMPTION_REQUEST": "消费请求",
+		"RENEWAL_EXTENDED": "续订延长",
+		"RENEWAL_EXTENSION": "批量续订延期",
+		"REVOKE": "权益撤销",
+		"ONE_TIME_CHARGE": "一次性购买",
+		"EXTERNAL_PURCHASE_TOKEN": "外部购买令牌",
+		"RESCIND_CONSENT": "撤回授权",
+		"METADATA_UPDATE": "元数据更新",
+		"MIGRATION": "订阅迁移",
+		"TEST": "测试"
+	},
+	"subtype": {
+		"INITIAL_BUY": "首次购买",
+		"RESUBSCRIBE": "重新订阅",
+		"UPGRADE": "升级",
+		"DOWNGRADE": "降级",
+		"AUTO_RENEW_ENABLED": "开启自动续订",
+		"AUTO_RENEW_DISABLED": "关闭自动续订",
+		"VOLUNTARY": "自愿到期",
+		"BILLING_RETRY": "计费重试",
+		"BILLING_RECOVERY": "计费恢复",
+		"GRACE_PERIOD": "宽限期",
+		"PRICE_INCREASE": "涨价生效",
+		"PENDING": "待处理",
+		"ACCEPTED": "已接受",
+		"PRODUCT_NOT_FOR_SALE": "商品已下架",
+		"SUMMARY": "汇总",
+		"FAILURE": "失败",
+		"UNREPORTED": "未上报",
+		"ACTIVE_TOKEN_REMINDER": "令牌有效提醒",
+		"CREATED": "已创建"
+	}
+}

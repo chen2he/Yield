@@ -35,7 +35,21 @@
 	"observability": {
 		"enabled": true
 	},
-	"upload_source_maps": true
+	"upload_source_maps": true,
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "yield",
+			// 运行 `wrangler d1 create yield` 后把返回的 id 填进来；用「Deploy to Cloudflare」按钮会自动创建并注入。
+			"database_id": "",
+			"migrations_dir": "migrations"
+		}
+	],
+	"vars": {
+		// Web Push VAPID 公钥 + subject。请换成你自己的（见 README「Web Push」生成）。私钥用 `wrangler secret put VAPID_PRIVATE_KEY`。
+		"VAPID_PUBLIC_KEY": "",
+		"VAPID_SUBJECT": "mailto:you@example.com"
+	}
 	/**
 	 * Smart Placement
 	 * https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement
