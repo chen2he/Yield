@@ -1,7 +1,7 @@
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 import { type NextRequest, NextResponse } from "next/server";
 import { notifyEvent } from "@/lib/asc/notify";
-import { getProductLabelMap, getSettings } from "@/lib/asc/settings";
+import { getAllowedAppIds, getProductLabelMap, getSettings } from "@/lib/asc/settings";
 import { processNotification } from "@/lib/asc/store";
 import { NotificationVerifyError, verifyNotification } from "@/lib/asc/verify";
 
@@ -34,11 +34,19 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 	}
 
 	const { env, ctx } = getCloudflareContext();
+	const [settings, allowedAppIds] = await Promise.all([getSettings(), getAllowedAppIds()]);
+
+	// App ID 过滤：白名单为空则接收所有应用的通知；非空则仅接收 app_apple_id 命中的通知，其余整体丢弃（不入库、不推送）。
+	const appAppleId = decoded.payload.data?.appAppleId ?? decoded.payload.summary?.appAppleId;
+	if (allowedAppIds.length > 0 && (appAppleId == null || !allowedAppIds.includes(appAppleId))) {
+		return NextResponse.json({ ok: true, discarded: true, reason: "app_id_mismatch" });
+	}
+
 	const result = await processNotification(env.DB, decoded);
 
 	// 仅新通知推送（Apple 重发的重复通知不再打扰）。fire-and-forget，不阻塞响应。
 	if (!result.duplicate) {
-		const [settings, productMap] = await Promise.all([getSettings(), getProductLabelMap()]);
+		const productMap = await getProductLabelMap();
 		const task = notifyEvent(decoded, settings, productMap).catch((e) =>
 			console.error("[asc-webhook] notify error", e),
 		);

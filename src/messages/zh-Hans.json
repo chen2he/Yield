@@ -58,7 +58,7 @@
 		"footer": {
 			"blurb": "自托管、实时的 App Store 订单管理，跑在边缘上。",
 			"copyright": "© 2026 Yield",
-			"license": "开源 · MIT",
+			"license": "开源 · Apache 2.0",
 			"oc": "Orange Cloud 出品"
 		}
 	},
@@ -164,6 +164,12 @@
 		"ocHint": "用于推送通知",
 		"pushLocaleLabel": "推送语言",
 		"save": "保存",
+		"appIdTitle": "App ID 过滤",
+		"appIdDescription": "仅接收这些 Apple App ID（在 App Store Connect → App 信息中查看）的推送通知。留空则接收所有应用的通知。",
+		"appIdLabel": "Apple App ID",
+		"noAppIds": "未设置过滤，正在接收所有应用的通知。",
+		"toastAppIdAdded": "App ID 已添加",
+		"toastAppIdDeleted": "App ID 已删除",
 		"productsTitle": "商品管理",
 		"productsDescription": "把完整 product ID 映射为可读名称，便于展示。",
 		"productIdLabel": "商品 ID",
@@ -188,6 +194,35 @@
 		"toastPushDisabled": "浏览器通知已关闭",
 		"webhookTitle": "Webhook 接入",
 		"webhookDescription": "在 App Store Connect 把此地址设为 App Store Server Notifications V2 通知 URL。收到的事件会验签、入库，并推送到 Bark / Orange Cloud。"
+	},
+	"onboarding": {
+		"brand": "Yield",
+		"welcomeTitle": "欢迎使用 Yield",
+		"welcomeDescription": "进入概览页前，先花一分钟完成一些基础设置。之后随时可以在设置页修改。",
+		"getStarted": "开始设置",
+		"prefsTitle": "偏好设置",
+		"prefsDescription": "展示币种与推送设备 ID。",
+		"currencyLabel": "展示币种",
+		"barkLabel": "Bark 设备 ID",
+		"barkHint": "用于推送通知",
+		"ocLabel": "Orange Cloud 设备 ID",
+		"ocHint": "用于推送通知",
+		"pushLocaleLabel": "推送语言",
+		"pushTitle": "浏览器通知",
+		"pushDescription": "开启浏览器推送通知，第一时间收到新订单提醒。",
+		"appIdTitle": "App ID 过滤",
+		"appIdDescription": "仅接收这些 Apple App ID 的推送通知，留空则接收所有应用的通知。可以跳过，之后再配置。",
+		"noAppIds": "未设置过滤，正在接收所有应用的通知。",
+		"productsTitle": "商品",
+		"productsDescription": "将完整商品 ID 映射为易读名称，用于展示。可以跳过，之后再添加。",
+		"noProducts": "暂无自定义商品。",
+		"doneTitle": "设置完成",
+		"doneDescription": "控制台已配置完毕，之后仍可随时在设置页调整这些配置。",
+		"enterOverview": "进入概览",
+		"continue": "继续",
+		"back": "上一步",
+		"skip": "暂时跳过设置",
+		"skipHint": "你可以随时在设置页完成剩余配置。"
 	},
 	"language": {
 		"label": "语言"

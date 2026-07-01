@@ -8,6 +8,7 @@ import { ModeToggle } from "@/components/admin/mode-toggle";
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { getPathname } from "@/i18n/navigation";
 import { SESSION_COOKIE, verifySessionToken } from "@/lib/admin/auth";
+import { getSettings } from "@/lib/asc/settings";
 
 // 读取会话 cookie 即令本子树动态渲染；未登录 -> /admin/login（locale 感知）。
 export const dynamic = "force-dynamic";
@@ -27,6 +28,11 @@ export default async function PanelLayout({
 	const token = (await cookies()).get(SESSION_COOKIE)?.value;
 	if (!token || !(await verifySessionToken(token, env.ADMIN_PASSWORD ?? ""))) {
 		redirect(getPathname({ href: "/admin/login", locale }));
+	}
+	// 首次部署未完成引导 -> 强制先走 /admin/onboarding。
+	const settings = await getSettings();
+	if (!settings.onboardingCompleted) {
+		redirect(getPathname({ href: "/admin/onboarding", locale }));
 	}
 
 	return (

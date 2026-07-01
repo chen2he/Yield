@@ -58,7 +58,7 @@
 		"footer": {
 			"blurb": "Self-hosted, real-time App Store order management on the edge.",
 			"copyright": "© 2026 Yield",
-			"license": "Open source · MIT",
+			"license": "Open source · Apache 2.0",
 			"oc": "Part of Orange Cloud"
 		}
 	},
@@ -164,6 +164,12 @@
 		"ocHint": "for push notifications",
 		"pushLocaleLabel": "Push language",
 		"save": "Save",
+		"appIdTitle": "App ID filtering",
+		"appIdDescription": "Only receive push notifications for these Apple App IDs (find it in App Store Connect → App Information). Leave empty to receive notifications for all apps.",
+		"appIdLabel": "Apple App ID",
+		"noAppIds": "No app ID filters — receiving notifications for all apps.",
+		"toastAppIdAdded": "App ID added",
+		"toastAppIdDeleted": "App ID removed",
 		"productsTitle": "Products",
 		"productsDescription": "Map full product IDs to readable labels for display.",
 		"productIdLabel": "Product ID",
@@ -188,6 +194,35 @@
 		"toastPushDisabled": "Browser notifications disabled",
 		"webhookTitle": "Webhook integration",
 		"webhookDescription": "Set this as your App Store Server Notifications V2 URL in App Store Connect. Incoming events are verified, stored, and pushed to Bark / Orange Cloud."
+	},
+	"onboarding": {
+		"brand": "Yield",
+		"welcomeTitle": "Welcome to Yield",
+		"welcomeDescription": "Let's set up your console before you head to the overview. This takes about a minute and you can change anything later in Settings.",
+		"getStarted": "Get started",
+		"prefsTitle": "Preferences",
+		"prefsDescription": "Display currency and push device IDs.",
+		"currencyLabel": "Display currency",
+		"barkLabel": "Bark device ID",
+		"barkHint": "for push notifications",
+		"ocLabel": "Orange Cloud device ID",
+		"ocHint": "for push notifications",
+		"pushLocaleLabel": "Push language",
+		"pushTitle": "Browser notifications",
+		"pushDescription": "Enable push notifications in this browser to get alerted about new orders right away.",
+		"appIdTitle": "App ID filtering",
+		"appIdDescription": "Only receive push notifications for these Apple App IDs. Leave empty to receive notifications for all apps. You can skip this and configure it later.",
+		"noAppIds": "No app ID filters — receiving notifications for all apps.",
+		"productsTitle": "Products",
+		"productsDescription": "Map full product IDs to readable labels for display. You can skip this and add products later.",
+		"noProducts": "No custom products yet.",
+		"doneTitle": "You're all set",
+		"doneDescription": "Your console is configured. You can revisit any of these settings from the Settings page at any time.",
+		"enterOverview": "Enter overview",
+		"continue": "Continue",
+		"back": "Back",
+		"skip": "Skip setup for now",
+		"skipHint": "You can finish setup anytime from Settings."
 	},
 	"language": {
 		"label": "Language"

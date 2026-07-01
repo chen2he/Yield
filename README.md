@@ -6,7 +6,7 @@
 
 **English** · [简体中文](README.zh-CN.md)
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![License: Apache 2.0 + Attribution](https://img.shields.io/badge/License-Apache%202.0%20%2B%20Attribution-yellow.svg)](LICENSE)
 [![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/chen2he/Yield)
 
 </div>
@@ -73,11 +73,11 @@ The webhook endpoint is intentionally **public** — Apple must reach it. Its on
 
    > Forking? `wrangler.jsonc` also holds instance-specific values to change: the worker `name` (and the matching `WORKER_SELF_REFERENCE` service), and the `routes` custom domain (set to the author's `yield.o-c.do` — remove it or point it at your own).
 
-3. **Apply migrations** (local and remote):
+3. **Apply migrations** (local and remote). The scripts target the `DB` binding rather than a hardcoded database name, so they work unchanged no matter what you named your D1 database in step 2:
 
    ```bash
-   npx wrangler d1 migrations apply <database_name> --local
-   npx wrangler d1 migrations apply <database_name> --remote
+   pnpm run db:migrate:local
+   pnpm run db:migrate:remote
    ```
 
 4. **Generate a VAPID key pair** (for Web Push):
@@ -100,7 +100,7 @@ The webhook endpoint is intentionally **public** — Apple must reach it. Its on
    pnpm dev
    ```
 
-7. **Deploy**
+7. **Deploy** — this also applies any pending remote migrations first:
 
    ```bash
    pnpm run deploy
@@ -144,4 +144,6 @@ src/i18n/ · src/messages/   next-intl config + en / zh-Hans translations
 
 ## License
 
-[MIT](LICENSE) © chen2he
+[Apache License 2.0, with an additional attribution requirement](LICENSE) © chen2he
+
+Deployments and forks must keep a visible credit to Yield and its author — see the LICENSE file for the exact terms.
