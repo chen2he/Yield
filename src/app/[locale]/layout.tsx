@@ -82,6 +82,11 @@ export async function generateMetadata({
 }
 
 export const viewport: Viewport = {
+	width: "device-width",
+	height: "device-height",
+	initialScale: 1,
+	maximumScale: 1,
+	userScalable: false,
 	themeColor: [
 		{ media: "(prefers-color-scheme: light)", color: "#ffffff" },
 		{ media: "(prefers-color-scheme: dark)", color: "#0b0c0e" },
