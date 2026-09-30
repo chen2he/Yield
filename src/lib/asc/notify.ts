@@ -176,6 +176,11 @@ export async function notifyEvent(
 	settings: AppSettings,
 	productMap: Map<string, string>,
 ): Promise<void> {
+	// 家庭共享一笔购买会触发多条 webhook（每个共享成员一份），照单全推等于重复提醒；跳过即可，DB 照常入账。
+	if (decoded.transaction?.inAppOwnershipType === "FAMILY_SHARED") return;
+	// 0 元订单（促销码 / offer 兑换等）不是实际收入，"新订单"提醒没有意义。
+	if (REVENUE_TYPES.has(decoded.payload.notificationType) && decoded.transaction?.price === 0) return;
+
 	const appAppleId = decoded.payload.data?.appAppleId ?? decoded.payload.summary?.appAppleId;
 	const appName = await resolveAppName(appAppleId);
 	const push = buildPush(decoded, productMap, settings.pushLocale, appName);

@@ -77,7 +77,13 @@ const ORDER_SELECT = `t.transaction_id, t.original_transaction_id, t.product_id,
         t.notification_type, t.environment, s.status AS sub_status`;
 
 function buildWhere(q: OrderQuery): { sql: string; params: unknown[] } {
-	const clauses: string[] = [];
+	// 家庭共享：同一笔购买会给每个共享成员各生成一行交易，只有 PURCHASED 那一行是实付订单，
+	// 其余 FAMILY_SHARED 行是免费的共享副本，不应作为独立订单出现在列表里。
+	// 0 元订单（促销码 / offer 兑换等）不是实际收入，同样排除。
+	const clauses: string[] = [
+		"(t.in_app_ownership_type IS NULL OR t.in_app_ownership_type != 'FAMILY_SHARED')",
+		"(t.price_millis IS NULL OR t.price_millis != 0)",
+	];
 	const params: unknown[] = [];
 	if (q.type) {
 		clauses.push("t.type = ?");
@@ -318,13 +324,23 @@ export async function fetchOverview(q: OverviewQuery): Promise<Overview> {
 	const envP: unknown[] = q.env ? [q.env] : [];
 	const since = Date.now() - q.trendDays * 86_400_000;
 
+	// Apple 家庭共享：一次购买会给每个共享成员各生成一行交易（同 purchase_date/product_id/price_millis，
+	// 不同 original_transaction_id），仅 in_app_ownership_type = 'PURCHASED' 的一行对应实际付款。
+	// 统计订单数 / 收入时必须排除 FAMILY_SHARED 行，否则会重复计入收入。
+	// 0 元订单（促销码 / offer 兑换等）不是实际收入，同样排除。
+	const notFamilyShared = "(in_app_ownership_type IS NULL OR in_app_ownership_type != 'FAMILY_SHARED')";
+	const notZeroPrice = "(price_millis IS NULL OR price_millis != 0)";
+	const txWhere = q.env
+		? `WHERE environment = ? AND ${notFamilyShared} AND ${notZeroPrice}`
+		: `WHERE ${notFamilyShared} AND ${notZeroPrice}`;
+
 	const [txRow, subRow, revenueRows, productRows, statusRows, trendRows, fx] = await Promise.all([
 		queryFirst<{ total: number; paid: number; refunded: number }>(
 			db,
 			`SELECT COUNT(*) total,
 			        SUM(CASE WHEN revocation_date IS NULL THEN 1 ELSE 0 END) paid,
 			        SUM(CASE WHEN revocation_date IS NOT NULL THEN 1 ELSE 0 END) refunded
-			 FROM transactions ${envWhere}`,
+			 FROM transactions ${txWhere}`,
 			envP,
 		),
 		queryFirst<{ total: number; active: number; lifetime_active: number; recurring_active: number }>(
@@ -339,13 +355,13 @@ export async function fetchOverview(q: OverviewQuery): Promise<Overview> {
 		queryAll<{ currency: string | null; orders: number; sum_millis: number }>(
 			db,
 			`SELECT currency, COUNT(*) orders, SUM(price_millis) sum_millis
-			 FROM transactions WHERE price_millis IS NOT NULL${envAnd}
+			 FROM transactions WHERE price_millis IS NOT NULL AND price_millis != 0 AND ${notFamilyShared}${envAnd}
 			 GROUP BY currency ORDER BY orders DESC`,
 			envP,
 		),
 		queryAll<{ product_id: string | null; count: number }>(
 			db,
-			`SELECT product_id, COUNT(*) count FROM transactions ${envWhere} GROUP BY product_id ORDER BY count DESC LIMIT 10`,
+			`SELECT product_id, COUNT(*) count FROM transactions ${txWhere} GROUP BY product_id ORDER BY count DESC LIMIT 10`,
 			envP,
 		),
 		queryAll<{ status: string | null; count: number }>(
@@ -357,7 +373,7 @@ export async function fetchOverview(q: OverviewQuery): Promise<Overview> {
 			db,
 			`SELECT date(purchase_date / 1000, 'unixepoch') d, currency, COUNT(*) c, SUM(price_millis) sum_millis
 			 FROM transactions
-			 WHERE purchase_date IS NOT NULL AND purchase_date >= ?${envAnd}
+			 WHERE purchase_date IS NOT NULL AND purchase_date >= ? AND ${notFamilyShared} AND ${notZeroPrice}${envAnd}
 			 GROUP BY d, currency ORDER BY d`,
 			[since, ...envP],
 		),
